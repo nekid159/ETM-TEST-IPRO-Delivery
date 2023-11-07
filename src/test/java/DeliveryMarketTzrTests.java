@@ -3,15 +3,13 @@ import lib.ui.AuthPageObject;
 import lib.ui.MainPageObject;
 import org.junit.jupiter.api.Test;
 
-public class DeliveryMarketTests extends CoreTestCase{
+public class DeliveryMarketTzrTests extends CoreTestCase{
     String SITE_URL = "https://idev.etm.ru/catalog";
     AuthPageObject AuthPageObject = new AuthPageObject();
     MainPageObject MainPageObject = new MainPageObject();
 
-    public static AuthPageObject authPageObject;
-
     @Test
-    public void check() throws InterruptedException {
+    public void TzrTests() throws InterruptedException {
         driver.get(SITE_URL);
 
         AuthPageObject.marketAuthorization();
