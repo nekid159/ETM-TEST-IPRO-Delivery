@@ -1,22 +1,28 @@
 package lib.ui;
 import lib.BaseSeleniumPage;
+import lib.ui.MainPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class AuthPageObject extends BaseSeleniumPage {
     private static final
 
-    String LOGIN_MARKET="9216572712";
-    String PASSWORD_MARKET="qakras1234";
+    String LOGIN_MARKET="9191640883";
+    String PASSWORD_MARKET="Dd17549bb";
     String LOGIN_IPRO="60004392kal";
     String PASSWORD_IPRO="thqu5943";
+    MainPageObject MainPageObject = new MainPageObject();
 
 
 
-    public void marketAuthorization(){
+    public void marketAuthorization() throws InterruptedException {
 
-        driver.findElement(By.xpath("//span[contains(.,'Все понятно')]")).click();
-        driver.findElement(By.xpath("//span[contains(.,'Все верно')]")).click();
+        Thread.sleep(500);
+
+        MainPageObject.waitForElementAndClick("//span[contains(.,'Все понятно')]","not found and click element of cookies",5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'Все верно')]","not found and click element of city",5);
+        //driver.findElement(By.xpath("//span[contains(.,'Все понятно')]")).click();
+        //driver.findElement(By.xpath("//span[contains(.,'Все верно')]")).click();
         driver.findElement(By.xpath("//button[@data-testid='authorization-button']")).click();
         driver.findElement(By.name("login")).clear();
         driver.findElement(By.name("login")).sendKeys(LOGIN_MARKET);
