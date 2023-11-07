@@ -1,7 +1,7 @@
 import lib.CoreTestCase;
 
 public class DeliveryIPROTests extends CoreTestCase {
-    public void Check2(){
+    public void Check4(){
 
     }
 }
