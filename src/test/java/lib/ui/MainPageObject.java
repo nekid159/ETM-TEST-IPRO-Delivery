@@ -11,8 +11,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
-
-
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,10 +42,28 @@ public class MainPageObject extends BaseSeleniumPage {
         element.click();
 
         return element;
-
     }
 
-    public void goToDelivery()  {
+    public void goToDelivery()
+    {
       waitForElementPresent("//a[text()='Доставка и самовывоз']","not found and click element of cookies",5);
+    }
+
+    public void getCurrentDay() {
+        LocalDate currentDate = LocalDate.now();
+        int dayOfMonth = currentDate.getDayOfMonth();
+        System.out.println(dayOfMonth);
+    }
+    public void getTomorrowDay() {
+        LocalDate currentDate = LocalDate.now();
+        int dayOfMonth = currentDate.getDayOfMonth();
+        int tomorrow = dayOfMonth+1;
+        System.out.println(tomorrow);
+    }
+    public void getClosestSunday(){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextSunday = currentDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+        int dayOfMonthAgain = nextSunday.getDayOfMonth();
+        System.out.println(dayOfMonthAgain);
     }
 }

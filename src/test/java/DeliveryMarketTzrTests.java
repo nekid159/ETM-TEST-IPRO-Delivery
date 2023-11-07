@@ -1,6 +1,7 @@
 import lib.CoreTestCase;
 import lib.ui.AuthPageObject;
 import lib.ui.MainPageObject;
+import org.example.Main;
 import org.junit.jupiter.api.Test;
 
 public class DeliveryMarketTzrTests extends CoreTestCase{
@@ -14,6 +15,9 @@ public class DeliveryMarketTzrTests extends CoreTestCase{
 
         AuthPageObject.marketAuthorization();
         MainPageObject.goToDelivery();
+        MainPageObject.getCurrentDay();
+        MainPageObject.getTomorrowDay();
+        MainPageObject.getClosestSunday();
 
     }
 
