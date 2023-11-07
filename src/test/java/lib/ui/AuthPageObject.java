@@ -9,8 +9,8 @@ public class AuthPageObject extends BaseSeleniumPage {
 
     String LOGIN_MARKET="9191640883";
     String PASSWORD_MARKET="Dd17549bb";
-    String LOGIN_IPRO="60004392kal";
-    String PASSWORD_IPRO="thqu5943";
+    String LOGIN_IPRO="60004392tes";
+    String PASSWORD_IPRO="alyd8965";
     MainPageObject MainPageObject = new MainPageObject();
 
 
