@@ -40,9 +40,15 @@ public class MainPageObject extends BaseSeleniumPage {
     public WebElement waitForElementAndClick(String xpath,String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(xpath,error_message,  timeoutInSeconds);
         element.click();
-
         return element;
     }
+
+    public void setSpbInHeader(){
+        waitForElementAndClick("//button[@data-testid='current-city']", "not found and click city in header", 5);
+        waitForElementAndClick("//span[contains(.,'Санкт-Петербург и ЛО')]","not found and click element of spb city",5);
+    }
+
+
 
     public void goToDelivery()
     {
@@ -132,8 +138,8 @@ public class MainPageObject extends BaseSeleniumPage {
         jsExecutor.executeScript("window.scrollBy(0,250)");
     }
 
-    public void scrollWebPageTillElementNotVisible(String xpath,String error_message, int max_swipes) {
 
+    public void scrollWebPageTillElementNotVisible(String xpath,String error_message, int max_swipes) {
         int already_swiped = 0;
         long timeoutInSeconds = 0;
         By by = null;

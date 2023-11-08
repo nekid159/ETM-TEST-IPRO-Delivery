@@ -22,5 +22,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DeliveryPageObject extends BaseSeleniumPage{
     MainPageObject MainPageObject = new MainPageObject();
 
+    public void SetDataForStandardMarket(){
+        String tomorrowDay = MainPageObject.getTomorrowDay();
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
+        MainPageObject.waitForElementAndClick("//button[contains(.,'" + tomorrowDay + "')]", "not found and click element of cookies", 5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'11-20')]","not found and click element of cookies",5);
+        MainPageObject.waitForElementAndClick("//button[contains(.,'до 5 000₽')]","not found and click element of cookies",5);
+        MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
+    }
+
+    public void CheckDataForStandard(){
+
+    }
+
+
 
 }
