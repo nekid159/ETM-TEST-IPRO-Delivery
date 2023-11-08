@@ -36,6 +36,13 @@ public class DeliveryPageObject extends BaseSeleniumPage{
 
     }
 
+    public void SetDataForExpressIpro(){
+        String today = MainPageObject.getCurrentDay();
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
+        MainPageObject.waitForElementAndClick("//button[contains(.,'" + today + "')]", "not found and click element of cookies", 5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'0.5 - 1')]","not found and click element of cookies",5);
+    }
 
 
 }
