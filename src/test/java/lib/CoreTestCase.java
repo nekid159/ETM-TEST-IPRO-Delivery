@@ -28,7 +28,7 @@ abstract public class CoreTestCase {
     }
     @AfterEach
     public void tearDown(){
-        driver.close();
-        driver.quit();
+        // driver.close();
+        // driver.quit();
     }
 }

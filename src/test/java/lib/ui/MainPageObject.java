@@ -49,22 +49,22 @@ public class MainPageObject extends BaseSeleniumPage {
       waitForElementPresent("//a[text()='Доставка и самовывоз']","not found and click element of cookies",5);
     }
 
-    public void getCurrentDay() {
+    public String getCurrentDay() {
         LocalDate currentDate = LocalDate.now();
         int dayOfMonth = currentDate.getDayOfMonth();
-        System.out.println(dayOfMonth);
+        return String.valueOf(dayOfMonth);
     }
-    public void getTomorrowDay() {
+    public String getTomorrowDay() {
         LocalDate currentDate = LocalDate.now();
         int dayOfMonth = currentDate.getDayOfMonth();
         int tomorrow = dayOfMonth+1;
-        System.out.println(tomorrow);
+        return String.valueOf(tomorrow);
     }
-    public void getClosestSunday(){
+    public String getClosestSunday(){
         LocalDate currentDate = LocalDate.now();
         LocalDate nextSunday = currentDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
         int dayOfMonthAgain = nextSunday.getDayOfMonth();
-        System.out.println(dayOfMonthAgain);
+        return String.valueOf(dayOfMonthAgain);
     }
 
     public WebElement waitForElementAndClickable(String xpath, String error_message, long timeoutInSeconds){
