@@ -5,6 +5,7 @@ import lib.ui.MainPageObject;
 import org.example.Main;
 import org.junit.jupiter.api.Test;
 
+
 public class DeliveryMarketTzrTests extends CoreTestCase{
     String SITE_URL = "https://idev.etm.ru/catalog";
     String DELIVERY_URL = "https://idev.etm.ru/ipro3/delivery";
@@ -20,8 +21,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase{
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.SetDataForStandardMarket();
-
-
+        DeliveryPageObject.CheckDataForStandardMarket();
     }
 
 
