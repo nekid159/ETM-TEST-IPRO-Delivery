@@ -23,35 +23,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeliveryPageObject extends BaseSeleniumPage{
     MainPageObject MainPageObject = new MainPageObject();
-
-    public void SetDataForStandardMarket() throws InterruptedException {
-        String tomorrowDay = MainPageObject.getTomorrowDay();
+    public void setData(String timeSelector, String weightValue, String priceValue) throws InterruptedException {
         Thread.sleep(500);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//button[contains(.,'" + tomorrowDay + "')]", "not found and click element of cookies", 5);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//span[contains(.,'11-20')]","not found and click element of cookies",5);
-        MainPageObject.waitForElementAndClick("//button[contains(.,'до 5 000₽')]","not found and click element of cookies",5);
-        MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "не найден и не может нажать кнопку 'go-checkout-btn'", 5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'" + timeSelector + "')]", "не найден и не может нажать элемент 'cookies'", 5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "не найден и не может нажать кнопку 'go-checkout-btn'", 5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'" + weightValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
+        MainPageObject.waitForElementAndClick("//button[contains(.,'" + priceValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
     }
 
     public void CheckDataForStandardMarket() throws InterruptedException {
         Thread.sleep(500);
+        //MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Стандартная"));
         Assert.assertFalse(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Экспресс"));
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Бесплатно при заказе от "));
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getTomorrowDay()));
-    }
-
-    public void SetDataForExpressMarket() throws InterruptedException {
-        String currentDay = MainPageObject.getCurrentDay();
-        Thread.sleep(500);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//button[contains(.,'" + currentDay + "')]", "not found and click element of cookies", 5);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//span[contains(.,'11-20')]","not found and click element of cookies",5);
-        MainPageObject.waitForElementAndClick("//button[contains(.,'до 5 000₽')]","not found and click element of cookies",5);
-        MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
     }
 
     public void CheckDataForExpressMarket() throws InterruptedException {
@@ -63,17 +50,6 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getCurrentDay()));
     }
 
-    public void SetDataForStandardMarketFree() throws InterruptedException {
-        String tomorrowDay = MainPageObject.getTomorrowDay();
-        Thread.sleep(500);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//button[contains(.,'" + tomorrowDay + "')]", "not found and click element of cookies", 5);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//span[contains(.,'11-20')]","not found and click element of cookies",5);
-        //MainPageObject.waitForElementAndClick("//button[contains(.,',более 5 000₽')]","not found and click element of cookies",5);
-        //MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
-    }
-
     public void CheckDataForStandardMarketFree() throws InterruptedException {
         Thread.sleep(500);
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Стандартная"));
@@ -81,15 +57,6 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Бесплатно"));
         //Assert.assertFalse(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("при заказе от"));
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getTomorrowDay()));
-    }
-
-    public void SetDataForExpressMarketFree() throws InterruptedException {
-        String currentDay = MainPageObject.getCurrentDay();
-        Thread.sleep(500);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//button[contains(.,'" + currentDay + "')]", "not found and click element of cookies", 5);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//span[contains(.,'11-20')]","not found and click element of cookies",5);
     }
 
     public void CheckDataForExpressMarketFree() throws InterruptedException {
@@ -100,15 +67,6 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getTomorrowDay()));
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getCurrentDay()));
     }
-    public void SetOutOfDate() throws InterruptedException {
-        String closestSunday = MainPageObject.getClosestSunday();
-        Thread.sleep(500);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//button[contains(.,'" + closestSunday + "')]", "not found and click element of cookies", 5);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
-        MainPageObject.waitForElementAndClick("//span[contains(.,'11-20')]","not found and click element of cookies",5);
-    }
-
     public void CheckOutOfDate() throws InterruptedException {
         Thread.sleep(500);
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Стандартная"));

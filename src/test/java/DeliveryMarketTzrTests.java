@@ -17,56 +17,61 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     @Test
     public void StandardDelivery() throws InterruptedException
     {
+        String tomorrowDay = MainPageObject.getTomorrowDay();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.SetDataForStandardMarket();
+        DeliveryPageObject.setData(tomorrowDay, "11-20", "до 5 000₽");
         DeliveryPageObject.CheckDataForStandardMarket();
     }
 
     @Test
     public void ExpressDelivery() throws InterruptedException {
+        String currentDay = MainPageObject.getCurrentDay();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.SetDataForExpressMarket();
+        DeliveryPageObject.setData(currentDay, "11-20", "до 5 000₽");
         DeliveryPageObject.CheckDataForExpressMarket();
     }
 
     @Test
     public void StandardDeliveryFree() throws InterruptedException {
+        String tomorrowDay = MainPageObject.getTomorrowDay();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.SetDataForStandardMarketFree();
+        DeliveryPageObject.setData(tomorrowDay, "11-20", "более 5 000₽");
         DeliveryPageObject.CheckDataForStandardMarketFree();
     }
 
     @Test
     public void ExpressDeliveryFree() throws InterruptedException {
+        String currentDay = MainPageObject.getCurrentDay();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.SetDataForExpressMarketFree();
+        DeliveryPageObject.setData(currentDay, "11-20", "более 5 000₽");
         DeliveryPageObject.CheckDataForExpressMarketFree();
     }
 
     @Test
     public void OutOfDate() throws InterruptedException {
+        String closestSunday = MainPageObject.getClosestSunday();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.SetOutOfDate();
+        DeliveryPageObject.setData(closestSunday, "11-20", "более 5 000₽");
         DeliveryPageObject.CheckOutOfDate();
     }
 
