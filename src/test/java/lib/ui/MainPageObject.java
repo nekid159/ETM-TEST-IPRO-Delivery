@@ -72,6 +72,12 @@ public class MainPageObject extends BaseSeleniumPage {
         int dayOfMonthAgain = nextSunday.getDayOfMonth();
         return String.valueOf(dayOfMonthAgain);
     }
+    public String getClosestMonday(){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextMonday = currentDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        int closestMonday = nextMonday.getDayOfMonth();
+        return String.valueOf(closestMonday);
+    }
 
     public WebElement waitForElementAndClickable(String xpath, String error_message, long timeoutInSeconds){
         WebDriverWait wait=new WebDriverWait(driver, 10);

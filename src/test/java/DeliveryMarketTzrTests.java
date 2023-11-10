@@ -67,6 +67,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.SetOutOfDate();
+        DeliveryPageObject.CheckOutOfDate();
     }
 
 }
