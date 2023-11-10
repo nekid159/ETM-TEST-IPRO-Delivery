@@ -59,4 +59,14 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
         DeliveryPageObject.CheckDataForExpressMarketFree();
     }
 
+    @Test
+    public void OutOfDate() throws InterruptedException {
+        driver.get(SITE_URL);
+        AuthPageObject.marketAuthorization();
+        Thread.sleep(1000);
+        driver.get(DELIVERY_URL);
+        MainPageObject.setSpbInHeader();
+        DeliveryPageObject.SetOutOfDate();
+    }
+
 }

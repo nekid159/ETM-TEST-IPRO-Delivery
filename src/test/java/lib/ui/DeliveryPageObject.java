@@ -100,6 +100,23 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getTomorrowDay()));
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getCurrentDay()));
     }
+    public void SetOutOfDate() throws InterruptedException {
+        String closestSunday = MainPageObject.getClosestSunday();
+        Thread.sleep(500);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
+        MainPageObject.waitForElementAndClick("//button[contains(.,'" + closestSunday + "')]", "not found and click element of cookies", 5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'11-20')]","not found and click element of cookies",5);
+    }
+
+    public void CheckOutOfDate() throws InterruptedException {
+        Thread.sleep(500);
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Стандартная"));
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Экспресс"));
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Бесплатно"));
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getTomorrowDay()));
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getCurrentDay()));
+    }
 
     public void SetDataForExpressIpro(){
         String today = MainPageObject.getCurrentDay();
@@ -108,6 +125,7 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
         MainPageObject.waitForElementAndClick("//span[contains(.,'0.5 - 1')]","not found and click element of cookies",5);
     }
+
 
     public void SetDataForStandardIpro(){
         String tomorrowDayForIpro = MainPageObject.getTomorrowDay();
