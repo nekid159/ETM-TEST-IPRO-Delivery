@@ -30,7 +30,9 @@ public class AuthPageObject extends BaseSeleniumPage {
         driver.findElement(By.name("password")).sendKeys(PASSWORD_MARKET);
         driver.findElement(By.xpath("//button[@data-testid='go-to-system']")).click();
     }
-    public void iPROAuthorization(){
+    public void iPROAuthorization() throws InterruptedException {
+
+        Thread.sleep(500);
 
         MainPageObject.waitForElementAndClick("//span[contains(.,'Все понятно')]", "not found and click element of cookies",5);
         MainPageObject.waitForElementAndClick("//span[contains(.,'Все верно')]", "not found and click element of city",5);
