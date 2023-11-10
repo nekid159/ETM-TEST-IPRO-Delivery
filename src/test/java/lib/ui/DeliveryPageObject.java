@@ -43,6 +43,26 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getTomorrowDay()));
     }
 
+    public void SetDataForExpressMarket()
+    {
+        String currentDay = MainPageObject.getCurrentDay();
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
+        MainPageObject.waitForElementAndClick("//button[contains(.,'" + currentDay + "')]", "not found and click element of cookies", 5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "not found and click go-checkout-btn", 5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'11-20')]","not found and click element of cookies",5);
+        MainPageObject.waitForElementAndClick("//button[contains(.,'до 5 000₽')]","not found and click element of cookies",5);
+        MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
+    }
+
+    public void CheckDataForExpressMarket()
+    {
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Стандартная"));
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Экспресс"));
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains("Бесплатно при заказе от "));
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getTomorrowDay()));
+        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(MainPageObject.getCurrentDay()));
+    }
+
     public void SetDataForExpressIpro(){
         String today = MainPageObject.getCurrentDay();
         MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "not found and click go-checkout-btn", 5);
