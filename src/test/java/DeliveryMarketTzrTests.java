@@ -15,7 +15,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
 
     @Test
-    public void Case1_StandardDelivery() throws InterruptedException
+    public void StandardDelivery() throws InterruptedException
     {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
@@ -26,15 +26,37 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
         DeliveryPageObject.CheckDataForStandardMarket();
     }
 
-    //@Test
-    //public void Case2_ExpressDelivery()
-   // {
-   //     DeliveryPageObject.SetDataForExpressMarket();
-    //    DeliveryPageObject.CheckDataForExpressMarket();
-   // }
+    @Test
+    public void ExpressDelivery() throws InterruptedException {
+        driver.get(SITE_URL);
+        AuthPageObject.marketAuthorization();
+        Thread.sleep(1000);
+        driver.get(DELIVERY_URL);
+        MainPageObject.setSpbInHeader();
+        DeliveryPageObject.SetDataForExpressMarket();
+        DeliveryPageObject.CheckDataForExpressMarket();
+    }
 
+    @Test
+    public void StandardDeliveryFree() throws InterruptedException {
+        driver.get(SITE_URL);
+        AuthPageObject.marketAuthorization();
+        Thread.sleep(1000);
+        driver.get(DELIVERY_URL);
+        MainPageObject.setSpbInHeader();
+        DeliveryPageObject.SetDataForStandardMarketFree();
+        DeliveryPageObject.CheckDataForStandardMarketFree();
+    }
 
-
-
+    @Test
+    public void ExpressDeliveryFree() throws InterruptedException {
+        driver.get(SITE_URL);
+        AuthPageObject.marketAuthorization();
+        Thread.sleep(1000);
+        driver.get(DELIVERY_URL);
+        MainPageObject.setSpbInHeader();
+        DeliveryPageObject.SetDataForExpressMarketFree();
+        DeliveryPageObject.CheckDataForExpressMarketFree();
+    }
 
 }
