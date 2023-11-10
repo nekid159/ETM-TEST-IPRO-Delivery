@@ -3,10 +3,11 @@ import lib.ui.AuthPageObject;
 import lib.ui.DeliveryPageObject;
 import lib.ui.MainPageObject;
 import org.example.Main;
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
-
-
-public class DeliveryMarketTzrTests extends CoreTestCase{
+import org.junit.runners.MethodSorters;
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class DeliveryMarketTzrTests extends CoreTestCase {
     String SITE_URL = "https://idev.etm.ru/catalog";
     String DELIVERY_URL = "https://idev.etm.ru/ipro3/delivery";
     AuthPageObject AuthPageObject = new AuthPageObject();
@@ -14,7 +15,8 @@ public class DeliveryMarketTzrTests extends CoreTestCase{
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
 
     @Test
-    public void StandardDelivery() throws InterruptedException {
+    public void Case1_StandardDelivery() throws InterruptedException
+    {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
@@ -22,6 +24,13 @@ public class DeliveryMarketTzrTests extends CoreTestCase{
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.SetDataForStandardMarket();
         DeliveryPageObject.CheckDataForStandardMarket();
+    }
+
+    @Test
+    public void Case2_ExpressDelivery()
+    {
+        DeliveryPageObject.SetDataForExpressMarket();
+        DeliveryPageObject.CheckDataForExpressMarket();
     }
 
 
