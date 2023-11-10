@@ -20,6 +20,7 @@ public class DeliveryIPROTests extends CoreTestCase {
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.SetDataForExpressIpro();
+        DeliveryPageObject.CheckForStandardIpro();
 
 
     }
