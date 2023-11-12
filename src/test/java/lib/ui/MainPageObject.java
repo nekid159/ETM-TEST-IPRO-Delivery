@@ -66,6 +66,13 @@ public class MainPageObject extends BaseSeleniumPage {
         int tomorrow = dayOfMonth+1;
         return String.valueOf(tomorrow);
     }
+
+    public String getDayAfterTomorrowDay() {
+        LocalDate currentDate = LocalDate.now();
+        int dayOfMonth = currentDate.getDayOfMonth();
+        int dayAfterTomorrow = dayOfMonth+2;
+        return String.valueOf(dayAfterTomorrow);
+    }
     public String getClosestSunday(){
         LocalDate currentDate = LocalDate.now();
         LocalDate nextSunday = currentDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
