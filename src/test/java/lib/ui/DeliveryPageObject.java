@@ -31,6 +31,13 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         MainPageObject.waitForElementAndClick("//span[contains(.,'" + weightValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
         MainPageObject.waitForElementAndClick("//button[contains(.,'" + priceValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
     }
+    public void setDataIpro(String timeSelector, String weightValue) throws InterruptedException {
+        Thread.sleep(500);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "не найден и не может нажать кнопку 'go-checkout-btn'", 5);
+        MainPageObject.waitForElementAndClick("//button/span[contains(.,'" + timeSelector + "')]", "не найден и не может нажать элемент 'cookies'", 5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "не найден и не может нажать кнопку 'go-checkout-btn'", 5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'" + weightValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
+    }
     public void CheckDataOneCase(String deliveryName, String deliveryTime, String plashka) throws InterruptedException {
         Thread.sleep(1000);
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(deliveryName));

@@ -10,9 +10,13 @@ public class DeliveryIPROTests extends CoreTestCase {
     AuthPageObject AuthPageObject = new AuthPageObject();
     MainPageObject MainPageObject = new MainPageObject();
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
+
+    String tomorrowDay = MainPageObject.getTomorrowDay();
+    String currentDay = MainPageObject.getCurrentDay();
+    String closestSunday = MainPageObject.getClosestSunday();
+    String closestMonday = MainPageObject.getClosestMonday();
     @Test
     public void StandardDeliveryIpro() throws InterruptedException {
-        String dayAfterTomorrowDay = MainPageObject.getDayAfterTomorrowDay();
 
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
@@ -20,9 +24,9 @@ public class DeliveryIPROTests extends CoreTestCase {
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.setDataForIpro(dayAfterTomorrowDay,"2 - 3");
-        //DeliveryPageObject.SetDataForStandardIpro();
-        DeliveryPageObject.CheckForStandardIpro();
+        DeliveryPageObject.setDataIpro(tomorrowDay,"2 - 3");
+        DeliveryPageObject.CheckDataOneCase("Стандартная", tomorrowDay, "В ближайшую дату");
+
 
     }
 
