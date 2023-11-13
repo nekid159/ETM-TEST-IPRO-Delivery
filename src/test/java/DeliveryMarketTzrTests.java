@@ -13,66 +13,68 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     AuthPageObject AuthPageObject = new AuthPageObject();
     MainPageObject MainPageObject = new MainPageObject();
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
+    String tomorrowDay = MainPageObject.getTomorrowDay();
+    String currentDay = MainPageObject.getCurrentDay();
+    String closestSunday = MainPageObject.getClosestSunday();
+    String closestMonday = MainPageObject.getClosestMonday();
 
     @Test
     public void StandardDelivery() throws InterruptedException
     {
-        String tomorrowDay = MainPageObject.getTomorrowDay();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(tomorrowDay, "11-20", "до 5 000₽");
-        DeliveryPageObject.CheckDataForStandardMarket();
+        MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
+        DeliveryPageObject.CheckDataOneCase("Стандартная", tomorrowDay, "Бесплатно при заказе от");
     }
 
     @Test
-    public void ExpressDelivery() throws InterruptedException {
-        String currentDay = MainPageObject.getCurrentDay();
+    public void ExpressDelivery() throws InterruptedException
+    {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(currentDay, "11-20", "до 5 000₽");
-        DeliveryPageObject.CheckDataForExpressMarket();
+        MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
+        DeliveryPageObject.CheckDataTwoCases("Экспресс", currentDay, "Бесплатно при заказе от", "Стандартная", tomorrowDay);
     }
 
     @Test
     public void StandardDeliveryFree() throws InterruptedException {
-        String tomorrowDay = MainPageObject.getTomorrowDay();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(tomorrowDay, "11-20", "более 5 000₽");
-        DeliveryPageObject.CheckDataForStandardMarketFree();
+        DeliveryPageObject.CheckDataOneCase("Стандартная", tomorrowDay, "Бесплатно");
     }
 
     @Test
     public void ExpressDeliveryFree() throws InterruptedException {
-        String currentDay = MainPageObject.getCurrentDay();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(currentDay, "11-20", "более 5 000₽");
-        DeliveryPageObject.CheckDataForExpressMarketFree();
+        DeliveryPageObject.CheckDataTwoCases("Экспресс", currentDay, "Бесплатно", "Стандартная", tomorrowDay);
     }
 
     @Test
     public void OutOfDate() throws InterruptedException {
-        String closestSunday = MainPageObject.getClosestSunday();
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         Thread.sleep(1000);
         driver.get(DELIVERY_URL);
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(closestSunday, "11-20", "более 5 000₽");
-        DeliveryPageObject.CheckOutOfDate();
+        DeliveryPageObject.CheckDataTwoCases("По запросу", closestSunday, "Вне стандартного графика", "Стандартная", closestMonday);
     }
 
 }
