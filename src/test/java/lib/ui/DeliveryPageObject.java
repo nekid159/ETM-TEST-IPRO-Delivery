@@ -31,7 +31,6 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         MainPageObject.waitForElementAndClick("//span[contains(.,'" + weightValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
         MainPageObject.waitForElementAndClick("//button[contains(.,'" + priceValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
     }
-
     public void CheckDataOneCase(String deliveryName, String deliveryTime, String plashka) throws InterruptedException {
         Thread.sleep(1000);
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(deliveryName));
@@ -45,6 +44,13 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(plashka));
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(secondDeliveryName));
         Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(secondDeliveryTime));
+    }
+    public void setConfiguratorCity(String cityName, String pointName) throws InterruptedException
+    {
+        Thread.sleep(1000);
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='configurator-delivery-address']", cityName, "error", 5);
+        MainPageObject.waitForElementPresent("//div/div[3]/div[1]/div[contains(.,'" + pointName + "')]", "not found and click element of cookies",5);
+        MainPageObject.waitForElementAndClick("//div/div[3]/div[1]/div[contains(.,'" + pointName + "')]", "not found and click element of cookies",5);
     }
 
 

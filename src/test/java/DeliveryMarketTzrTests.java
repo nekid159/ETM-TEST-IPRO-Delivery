@@ -76,5 +76,27 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
         DeliveryPageObject.setData(closestSunday, "11-20", "более 5 000₽");
         DeliveryPageObject.CheckDataTwoCases("По запросу", closestSunday, "Вне стандартного графика", "Стандартная", closestMonday);
     }
+    @Test
+    public void OutOfDateManager() throws InterruptedException
+    {
+        driver.get(SITE_URL);
+        AuthPageObject.marketAuthorization();
+        Thread.sleep(1000);
+        driver.get(DELIVERY_URL);
+        DeliveryPageObject.setConfiguratorCity("Россия, национальный парк Лосиный остров", "Россия, национальный парк Лосиный остров");
+        Thread.sleep(500);
+        DeliveryPageObject.setData(currentDay, "11-20", "более 15 000₽");
+        DeliveryPageObject.CheckDataOneCase("По запросу", "Вне стандартного графика", "Уточните у менеджера");
+    }
+    @Test
+    public void OutOfRouteManager() throws InterruptedException
+    {
+        driver.get(SITE_URL);
+        AuthPageObject.marketAuthorization();
+        Thread.sleep(1000);
+        driver.get(DELIVERY_URL);
+        DeliveryPageObject.setConfiguratorCity("Иркутск", "Россия, Иркутск");
+        DeliveryPageObject.CheckDataOneCase("По запросу", "Вне стандартного маршрута", "Уточните у менеджера");
+    }
 
 }

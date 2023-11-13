@@ -86,6 +86,12 @@ public class MainPageObject extends BaseSeleniumPage {
         return String.valueOf(closestMonday);
     }
 
+    public WebElement waitForElementClearAndSendKeys(String xpath, String value, String error_message, long timeoutInSeconds) {
+        WebElement element = waitForElementPresent(xpath,error_message,timeoutInSeconds);
+        element.sendKeys(Keys.chord(Keys.CONTROL, "a"), value);
+        return element;
+    }
+
     public WebElement waitForElementAndClickable(String xpath, String error_message, long timeoutInSeconds){
         WebDriverWait wait=new WebDriverWait(driver, 10);
         wait.withMessage(error_message + "\n");
