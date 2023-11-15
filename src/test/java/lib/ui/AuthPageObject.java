@@ -19,8 +19,8 @@ public class AuthPageObject extends BaseSeleniumPage {
 
         Thread.sleep(500);
 
-        MainPageObject.waitForElementAndClick("//span[contains(.,'Все понятно')]","not found and click element of cookies",5);
-        MainPageObject.waitForElementAndClick("//span[contains(.,'Все верно')]","not found and click element of city",5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='okay-button']","not found and click element of cookies",5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='understand-button']","not found and click element of cookies",5);
         //driver.findElement(By.xpath("//span[contains(.,'Все понятно')]")).click();
         //driver.findElement(By.xpath("//span[contains(.,'Все верно')]")).click();
         driver.findElement(By.xpath("//button[@data-testid='authorization-button']")).click();
