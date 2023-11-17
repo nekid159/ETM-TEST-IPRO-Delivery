@@ -50,9 +50,9 @@ public class MainPageObject extends BaseSeleniumPage {
 
 
 
-    public void goToDelivery()
-    {
-      waitForElementPresent("//a[text()='Доставка и самовывоз']","not found and click element of cookies",5);
+    public void goToDelivery() throws InterruptedException {
+        Thread.sleep(1500);
+        waitForElementAndClick("//a[@data-testid='top-menu-delivery']","not found and click element of cookies",5);
     }
 
     public String getCurrentDay() {
@@ -89,6 +89,15 @@ public class MainPageObject extends BaseSeleniumPage {
     public WebElement waitForElementClearAndSendKeys(String xpath, String value, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(xpath,error_message,timeoutInSeconds);
         element.sendKeys(Keys.chord(Keys.CONTROL, "a"), value);
+        return element;
+    }
+    public WebElement waitForElementScrollAndClick(String xpath,String error_message, long timeoutInSeconds) {
+        WebElement element = waitForElementPresent(xpath,error_message,  timeoutInSeconds);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.perform();
+        //Thread.sleep(1000);
+        element.click();
         return element;
     }
 

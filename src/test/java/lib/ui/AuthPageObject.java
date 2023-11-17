@@ -15,14 +15,11 @@ public class AuthPageObject extends BaseSeleniumPage {
 
 
 
-    public void marketAuthorization() throws InterruptedException {
-
+    public void marketAuthorization() throws InterruptedException
+    {
         Thread.sleep(500);
-
         MainPageObject.waitForElementAndClick("//button[@data-testid='okay-button']","not found and click element of cookies",5);
         MainPageObject.waitForElementAndClick("//button[@data-testid='understand-button']","not found and click element of cookies",5);
-        //driver.findElement(By.xpath("//span[contains(.,'Все понятно')]")).click();
-        //driver.findElement(By.xpath("//span[contains(.,'Все верно')]")).click();
         driver.findElement(By.xpath("//button[@data-testid='authorization-button']")).click();
         driver.findElement(By.name("login")).clear();
         driver.findElement(By.name("login")).sendKeys(LOGIN_MARKET);
@@ -30,19 +27,22 @@ public class AuthPageObject extends BaseSeleniumPage {
         driver.findElement(By.name("password")).sendKeys(PASSWORD_MARKET);
         driver.findElement(By.xpath("//button[@data-testid='go-to-system']")).click();
     }
-    public void iPROAuthorization() throws InterruptedException {
-
+    public void iPROAuthorization() throws InterruptedException
+    {
         Thread.sleep(500);
-
-        MainPageObject.waitForElementAndClick("//span[contains(.,'Все понятно')]", "not found and click element of cookies",5);
-        MainPageObject.waitForElementAndClick("//span[contains(.,'Все верно')]", "not found and click element of city",5);
-        //driver.findElement(By.xpath("//span[contains(.,'Все понятно')]")).click();
-        //driver.findElement(By.xpath("//span[contains(.,'Все верно')]")).click();
+        MainPageObject.waitForElementAndClick("//button[@data-testid='okay-button']","not found and click element of cookies",5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='understand-button']","not found and click element of cookies",5);
         driver.findElement(By.xpath("//button[@data-testid='authorization-button']")).click();
         driver.findElement(By.name("login")).clear();
         driver.findElement(By.name("login")).sendKeys(LOGIN_IPRO);
         driver.findElement(By.name("password")).clear();
         driver.findElement(By.name("password")).sendKeys(PASSWORD_IPRO);
         driver.findElement(By.xpath("//button[@data-testid='go-to-system']")).click();
+    }
+    public void cookiesAndCity() throws InterruptedException
+    {
+        Thread.sleep(500);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='okay-button']","not found and click element of cookies",5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='understand-button']","not found and click element of cookies",5);
     }
 }
