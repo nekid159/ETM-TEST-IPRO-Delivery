@@ -1,32 +1,15 @@
 package lib.ui;
-import io.qameta.allure.Attachment;
 import lib.BaseSeleniumPage;
-import lib.webelements.webelements;
-import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.WebElement;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeliveryPageObject extends BaseSeleniumPage{
     MainPageObject MainPageObject = new MainPageObject();
     public void setData(String timeSelector, String weightValue, String priceValue) throws InterruptedException {
         Thread.sleep(500);
-        MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-date']", "не найден и не может нажать кнопку 'go-checkout-btn'", 5);
-        MainPageObject.waitForElementAndClick("//button/span[contains(.,'" + timeSelector + "')]", "не найден и не может нажать элемент 'cookies'", 5);
+        MainPageObject.waitForElementAndClick("//*[@id=\"simple-tab-panel-0\"]/div/div[3]/div[1]/div/div/div/div/button", "Не удалось найти и кликнуть по элементу", 5);
+        MainPageObject.waitForElementAndClick("//button[contains(.,'" + timeSelector + "')]", "не найден и не может нажать элемент 'cookies'", 5);
         MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "не найден и не может нажать кнопку 'go-checkout-btn'", 5);
         MainPageObject.waitForElementAndClick("//span[contains(.,'" + weightValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
         MainPageObject.waitForElementAndClick("//button[contains(.,'" + priceValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
@@ -40,9 +23,9 @@ public class DeliveryPageObject extends BaseSeleniumPage{
     }
     public void CheckDataOneCase(String deliveryName, String deliveryTime, String plashka) throws InterruptedException {
         Thread.sleep(1000);
-        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(deliveryName));
-        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(deliveryTime));
-        Assert.assertTrue(driver.findElement(By.xpath("//div/table[contains(.,'Вид доставки')]")).getText().contains(plashka));
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='delivery-tarif-table']")).getText().contains(deliveryName));
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='delivery-tarif-table']")).getText().contains(deliveryTime));
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='delivery-tarif-table']")).getText().contains(plashka));
     }
     public void CheckDataTwoCases(String deliveryName, String deliveryTime, String plashka, String secondDeliveryName, String secondDeliveryTime)
     {
@@ -56,9 +39,33 @@ public class DeliveryPageObject extends BaseSeleniumPage{
     {
         Thread.sleep(1000);
         MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='configurator-delivery-address']", cityName, "error", 5);
+        Thread.sleep(1000);
         MainPageObject.waitForElementPresent("//div/div[3]/div[1]/div[contains(.,'" + pointName + "')]", "not found and click element of cookies",5);
         MainPageObject.waitForElementAndClick("//div/div[3]/div[1]/div[contains(.,'" + pointName + "')]", "not found and click element of cookies",5);
     }
+    public void setWeightForTariffs(String weight) throws InterruptedException
+    {
+        MainPageObject.waitForElementAndClick("//button[@data-testid='delivery-terms-btn-calculate']", "Не удалось найти и кликнуть по элементу", 5);
+        Thread.sleep(500);
+        //Alert alert = driver.switchTo().alert();
+       // MainPageObject.waitForElementAndClick("//button[@data-testid='popup-unloading-calculate']", "errowerr", 5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='input-order-weight']", "errowerr", 5);
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-order-weight']", "45", "error", 5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='popup-unloading-calculate']", "errowerr", 5);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

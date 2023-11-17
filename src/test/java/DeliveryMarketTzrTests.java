@@ -9,7 +9,6 @@ import org.junit.runners.MethodSorters;
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DeliveryMarketTzrTests extends CoreTestCase {
     String SITE_URL = "https://idev.etm.ru/catalog";
-    String DELIVERY_URL = "https://idev.etm.ru/ipro3/delivery";
     AuthPageObject AuthPageObject = new AuthPageObject();
     MainPageObject MainPageObject = new MainPageObject();
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
@@ -23,8 +22,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
+        MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(tomorrowDay, "11-20", "до 5 000₽");
         MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
@@ -36,8 +34,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
+        MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(currentDay, "11-20", "до 5 000₽");
         MainPageObject.waitForElementPresent("//span[contains(.,'Бесплатно при заказе от')]","not found and click element of cookies",5);
@@ -48,8 +45,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void StandardDeliveryFree() throws InterruptedException {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
+        MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(tomorrowDay, "11-20", "более 5 000₽");
         DeliveryPageObject.CheckDataOneCase("Стандартная", tomorrowDay, "Бесплатно");
@@ -59,8 +55,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void ExpressDeliveryFree() throws InterruptedException {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
+        MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(currentDay, "11-20", "более 5 000₽");
         DeliveryPageObject.CheckDataTwoCases("Экспресс", currentDay, "Бесплатно", "Стандартная", tomorrowDay);
@@ -70,22 +65,23 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void OutOfDate() throws InterruptedException {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
+        MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(closestSunday, "11-20", "более 5 000₽");
+        Thread.sleep(300);
         DeliveryPageObject.CheckDataTwoCases("По запросу", closestSunday, "Вне стандартного графика", "Стандартная", closestMonday);
+
     }
     @Test
     public void OutOfDateManager() throws InterruptedException
     {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
+        MainPageObject.goToDelivery();
+        MainPageObject.setSpbInHeader();
+        DeliveryPageObject.setData(currentDay, "11-20", "более 5 000₽");
+        DeliveryPageObject.setConfiguratorCity("Ленинградская область, Ломоносовский район, Виллозское городское поселение", "Ленинградская область, Ломоносовский район, Виллозское городское поселение");
         Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
-        DeliveryPageObject.setConfiguratorCity("Россия, национальный парк Лосиный остров", "Россия, национальный парк Лосиный остров");
-        Thread.sleep(500);
-        DeliveryPageObject.setData(currentDay, "11-20", "более 15 000₽");
         DeliveryPageObject.CheckDataOneCase("По запросу", "Вне стандартного графика", "Уточните у менеджера");
     }
     @Test
@@ -93,9 +89,9 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
-        DeliveryPageObject.setConfiguratorCity("Иркутск", "Россия, Иркутск");
+        MainPageObject.goToDelivery();
+        MainPageObject.setSpbInHeader();
+        DeliveryPageObject.setConfiguratorCity("Иркутск", "Иркутск");
         DeliveryPageObject.CheckDataOneCase("По запросу", "Вне стандартного маршрута", "Уточните у менеджера");
     }
 
