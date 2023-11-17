@@ -16,49 +16,36 @@ public class DeliveryIPROTests extends CoreTestCase {
     String closestSunday = MainPageObject.getClosestSunday();
     String closestMonday = MainPageObject.getClosestMonday();
     @Test
-    public void StandardDeliveryIpro() throws InterruptedException {
-
+    public void StandardDeliveryIpro() throws InterruptedException
+    {
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
-        //MainPageObject.goToDelivery();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
+        MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.setDataIpro(tomorrowDay,"2 - 3");
+        DeliveryPageObject.setDataIpro(tomorrowDay, "2 - 3");
         DeliveryPageObject.CheckDataOneCase("Стандартная", tomorrowDay, "В ближайшую дату");
-
-
     }
 
     @Test
-    public void ExpressDeliveryIpro() throws InterruptedException {
-        String currentDay = MainPageObject.getCurrentDay();
-
+    public void ExpressDeliveryIpro() throws InterruptedException
+    {
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
-        //MainPageObject.goToDelivery();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
+        MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.setDataForIpro(currentDay,"0.25 - 0.5");
-        //DeliveryPageObject.SetDataForStandardIpro();
-        DeliveryPageObject.CheckForExpressIpro();
-
+        DeliveryPageObject.setDataIpro(currentDay, "3 - 4");
+        DeliveryPageObject.CheckDataTwoCases("Экспресс-доставка", currentDay, "День в день", "Стандартная", tomorrowDay);
     }
 
     @Test
-    public void OutOfDateIpro() throws InterruptedException {
-        String tomorrowDay = MainPageObject.getTomorrowDay();
-
+    public void OutOfDateIpro() throws InterruptedException
+    {
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
-        //MainPageObject.goToDelivery();
-        Thread.sleep(1000);
-        driver.get(DELIVERY_URL);
+        MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
-        DeliveryPageObject.setDataForIpro(tomorrowDay,"10 - 12");
-        //DeliveryPageObject.SetDataForStandardIpro();
-        DeliveryPageObject.CheckOutOfDateIpro();
+        DeliveryPageObject.setDataIpro(closestSunday, "3 - 4");
+        DeliveryPageObject.CheckDataTwoCases("Вне стандартного графика", closestSunday, "Уточните у менеджера", "Стандартная", closestMonday);
 
     }
 
