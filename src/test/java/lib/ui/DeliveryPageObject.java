@@ -43,8 +43,8 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         MainPageObject.waitForElementPresent("//div/div[3]/div[1]/div[contains(.,'" + pointName + "')]", "not found and click element of cookies",5);
         MainPageObject.waitForElementAndClick("//div/div[3]/div[1]/div[contains(.,'" + pointName + "')]", "not found and click element of cookies",5);
     }
-    public void setWeightForTariffs(String weight)
-    {
+    public void setWeightForTariffs(String weight) throws InterruptedException {
+        Thread.sleep(1500);
         MainPageObject.waitForElementAndClick("//button[@data-testid='delivery-terms-btn-calculate']", "Не удалось найти и кликнуть по элементу", 5);
         MainPageObject.waitForElementAndClick("//input[@data-testid='input-order-weight']", "errowerr", 5);
         MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-order-weight']", weight, "error", 5);
@@ -52,6 +52,7 @@ public class DeliveryPageObject extends BaseSeleniumPage{
     }
     public void setTariffsWithFloorLift(String weight, String floor, Boolean lift) throws InterruptedException
     {
+        Thread.sleep(1500);
         MainPageObject.waitForElementAndClick("//button[@data-testid='delivery-terms-btn-calculate']", "Не удалось найти и кликнуть по элементу", 5);
         MainPageObject.waitForElementAndClick("//input[@data-testid='input-order-weight']", "errowerr", 5);
         MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-order-weight']", weight, "error", 5);
@@ -59,7 +60,7 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Thread.sleep(500);
         MainPageObject.waitForElementAndClick("//input[@data-testid='checkbox-riseToTheFloor']", "Не удалось найти и кликнуть по элементу", 5);
         MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-elevation-floor']", floor, "error", 5);
-        Thread.sleep(500);
+        Thread.sleep(1000);
         if (!lift) {
             MainPageObject.waitForElementAndClick("//input[@data-testid='switch-elevator']", "errowerr", 5);
 

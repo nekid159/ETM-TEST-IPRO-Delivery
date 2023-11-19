@@ -47,6 +47,7 @@ public class Tarifs extends CoreTestCase{
         MainPageObject.goToDelivery();
         DeliveryPageObject.setTariffsWithFloorLift("45", "9", false);
         MainPageObject.waitForElementAndClick("//button[@data-testid='popup-unloading-apply']", "Не удалось найти и кликнуть по элементу", 5);
+        Thread.sleep(1000);
         DeliveryPageObject.CheckOneTariff("Подъем на этаж", "1350 ₽");
     }
     @Test
