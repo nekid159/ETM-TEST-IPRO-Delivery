@@ -43,15 +43,34 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         MainPageObject.waitForElementPresent("//div/div[3]/div[1]/div[contains(.,'" + pointName + "')]", "not found and click element of cookies",5);
         MainPageObject.waitForElementAndClick("//div/div[3]/div[1]/div[contains(.,'" + pointName + "')]", "not found and click element of cookies",5);
     }
-    public void setWeightForTariffs(String weight) throws InterruptedException
+    public void setWeightForTariffs(String weight)
     {
         MainPageObject.waitForElementAndClick("//button[@data-testid='delivery-terms-btn-calculate']", "Не удалось найти и кликнуть по элементу", 5);
-        Thread.sleep(500);
-        //Alert alert = driver.switchTo().alert();
-       // MainPageObject.waitForElementAndClick("//button[@data-testid='popup-unloading-calculate']", "errowerr", 5);
         MainPageObject.waitForElementAndClick("//input[@data-testid='input-order-weight']", "errowerr", 5);
-        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-order-weight']", "45", "error", 5);
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-order-weight']", weight, "error", 5);
         MainPageObject.waitForElementAndClick("//button[@data-testid='popup-unloading-calculate']", "errowerr", 5);
+    }
+    public void setTariffsWithFloorLift(String weight, String floor, Boolean lift) throws InterruptedException
+    {
+        MainPageObject.waitForElementAndClick("//button[@data-testid='delivery-terms-btn-calculate']", "Не удалось найти и кликнуть по элементу", 5);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='input-order-weight']", "errowerr", 5);
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-order-weight']", weight, "error", 5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='popup-unloading-calculate']", "errowerr", 5);
+        Thread.sleep(500);
+        MainPageObject.waitForElementAndClick("//input[@data-testid='checkbox-riseToTheFloor']", "Не удалось найти и кликнуть по элементу", 5);
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-elevation-floor']", floor, "error", 5);
+        Thread.sleep(500);
+        if (!lift) {
+            MainPageObject.waitForElementAndClick("//input[@data-testid='switch-elevator']", "errowerr", 5);
+
+    }
+        Thread.sleep(500);
+    }
+    public void CheckOneTariff(String tariffName, String tariffPrice) throws InterruptedException {
+        Thread.sleep(1000);
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='delivery-terms-table']")).getText().contains(tariffName));
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='delivery-terms-table']")).getText().contains(tariffPrice));
+
     }
 
 
