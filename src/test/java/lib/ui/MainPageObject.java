@@ -43,55 +43,65 @@ public class MainPageObject extends BaseSeleniumPage {
         return element;
     }
 
-    public void setSpbInHeader(){
+    public void setSpbInHeader() throws InterruptedException
+    {
+        Thread.sleep(1000);
         waitForElementAndClick("//button[@data-testid='current-city']", "not found and click city in header", 5);
         waitForElementAndClick("//span[contains(.,'Санкт-Петербург и ЛО')]","not found and click element of spb city",5);
     }
 
 
 
-    public void goToDelivery() throws InterruptedException {
+    public void goToDelivery() throws InterruptedException
+    {
         Thread.sleep(1500);
         waitForElementAndClick("//a[@data-testid='top-menu-delivery']","not found and click element of cookies",5);
     }
 
-    public String getCurrentDay() {
+    public String getCurrentDay()
+    {
         LocalDate currentDate = LocalDate.now();
         int dayOfMonth = currentDate.getDayOfMonth();
         return String.valueOf(dayOfMonth);
     }
-    public String getTomorrowDay() {
+    public String getTomorrowDay()
+    {
         LocalDate currentDate = LocalDate.now();
         int dayOfMonth = currentDate.getDayOfMonth();
         int tomorrow = dayOfMonth+1;
         return String.valueOf(tomorrow);
     }
 
-    public String getDayAfterTomorrowDay() {
+    public String getDayAfterTomorrowDay()
+    {
         LocalDate currentDate = LocalDate.now();
         int dayOfMonth = currentDate.getDayOfMonth();
         int dayAfterTomorrow = dayOfMonth+2;
         return String.valueOf(dayAfterTomorrow);
     }
-    public String getClosestSunday(){
+    public String getClosestSunday()
+    {
         LocalDate currentDate = LocalDate.now();
         LocalDate nextSunday = currentDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
         int dayOfMonthAgain = nextSunday.getDayOfMonth();
         return String.valueOf(dayOfMonthAgain);
     }
-    public String getClosestMonday(){
+    public String getClosestMonday()
+    {
         LocalDate currentDate = LocalDate.now();
         LocalDate nextMonday = currentDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
         int closestMonday = nextMonday.getDayOfMonth();
         return String.valueOf(closestMonday);
     }
 
-    public WebElement waitForElementClearAndSendKeys(String xpath, String value, String error_message, long timeoutInSeconds) {
+    public WebElement waitForElementClearAndSendKeys(String xpath, String value, String error_message, long timeoutInSeconds)
+    {
         WebElement element = waitForElementPresent(xpath,error_message,timeoutInSeconds);
         element.sendKeys(Keys.chord(Keys.CONTROL, "a"), value);
         return element;
     }
-    public WebElement waitForElementScrollAndClick(String xpath,String error_message, long timeoutInSeconds) {
+    public WebElement waitForElementScrollAndClick(String xpath,String error_message, long timeoutInSeconds)
+    {
         WebElement element = waitForElementPresent(xpath,error_message,  timeoutInSeconds);
         Actions actions = new Actions(driver);
         actions.moveToElement(element);

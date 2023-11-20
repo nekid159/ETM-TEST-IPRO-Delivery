@@ -42,7 +42,8 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     }
 
     @Test
-    public void StandardDeliveryFree() throws InterruptedException {
+    public void StandardDeliveryFree() throws InterruptedException
+    {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         MainPageObject.goToDelivery();
@@ -52,7 +53,8 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     }
 
     @Test
-    public void ExpressDeliveryFree() throws InterruptedException {
+    public void ExpressDeliveryFree() throws InterruptedException
+    {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         MainPageObject.goToDelivery();
@@ -62,7 +64,8 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     }
 
     @Test
-    public void OutOfDate() throws InterruptedException {
+    public void OutOfDate() throws InterruptedException
+    {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         MainPageObject.goToDelivery();

@@ -62,15 +62,36 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='input-elevation-floor']", floor, "error", 5);
         Thread.sleep(1000);
         if (!lift) {
-            MainPageObject.waitForElementAndClick("//input[@data-testid='switch-elevator']", "errowerr", 5);
-
-    }
+            MainPageObject.waitForElementAndClick("//input[@data-testid='switch-elevator']", "errowerr", 5); }
         Thread.sleep(500);
     }
-    public void CheckOneTariff(String tariffName, String tariffPrice) throws InterruptedException {
+    public void CheckOneTariff(String tariffName, String tariffPrice) throws InterruptedException
+    {
         Thread.sleep(1000);
         Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='delivery-terms-table']")).getText().contains(tariffName));
         Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='delivery-terms-table']")).getText().contains(tariffPrice));
+    }
+
+    public void SetDataForSelfDelivery(String pointType, String pointName)
+    {
+        MainPageObject.waitForElementAndClick("//input[@data-testid='" + pointType + "']", "Не удалось найти и кликнуть по элементу", 5);
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", pointName, "error", 5);
+
+    }
+
+    public void CheckSearchSdekSelfDelivery(String firstSearch, String secondSearch, String thirdSearch) throws InterruptedException
+    {
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", firstSearch, "error", 5);
+        Thread.sleep(300);
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='selfdelivery-store-cdeck-0']")).getText().contains(firstSearch));
+
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", secondSearch, "error", 5);
+        Thread.sleep(300);
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='selfdelivery-store-cdeck-0")).getText().contains(secondSearch));
+
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", thirdSearch, "error", 5);
+        Thread.sleep(300);
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='selfdelivery-store-cdeck-0")).getText().contains(thirdSearch));
 
     }
 
