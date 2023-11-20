@@ -19,7 +19,7 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         MainPageObject.waitForElementAndClick("//*[@id=\"simple-tab-panel-0\"]/div/div[3]/div[1]/div/div/div/div/button", "Не удалось найти и кликнуть по элементу", 5);
         MainPageObject.waitForElementAndClick("//button[contains(.,'" + timeSelector + "')]", "не найден и не может нажать элемент 'cookies'", 5);
         MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "не найден и не может нажать кнопку 'go-checkout-btn'", 5);
-        MainPageObject.waitForElementAndClick("//span[contains(.,'2 - 3')]", "не найден и не может нажать элемент 'cookies'", 5);
+        MainPageObject.waitForElementAndClick("//span[contains(.,'" + weightValue + "')]", "не найден и не может нажать элемент 'cookies'", 5);
     }
     public void CheckDataOneCase(String deliveryName, String deliveryTime, String plashka) throws InterruptedException {
         Thread.sleep(1000);

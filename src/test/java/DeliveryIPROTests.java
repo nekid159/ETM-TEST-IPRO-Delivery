@@ -22,6 +22,7 @@ public class DeliveryIPROTests extends CoreTestCase {
         AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
+        Thread.sleep(500);
         DeliveryPageObject.setDataIpro(tomorrowDay, "2 - 3");
         DeliveryPageObject.CheckDataOneCase("Стандартная", tomorrowDay, "В ближайшую дату");
     }
@@ -33,6 +34,7 @@ public class DeliveryIPROTests extends CoreTestCase {
         AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
+        Thread.sleep(500);
         DeliveryPageObject.setDataIpro(currentDay, "3 - 4");
         DeliveryPageObject.CheckDataTwoCases("Экспресс-доставка", currentDay, "День в день", "Стандартная", tomorrowDay);
     }
@@ -44,9 +46,23 @@ public class DeliveryIPROTests extends CoreTestCase {
         AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
+        Thread.sleep(1000);
         DeliveryPageObject.setDataIpro(closestSunday, "3 - 4");
+        Thread.sleep(500);
         DeliveryPageObject.CheckDataTwoCases("Вне стандартного графика", closestSunday, "Уточните у менеджера", "Стандартная", closestMonday);
 
+    }
+
+    @Test
+    public void OutOfRouteIpro() throws InterruptedException
+    {
+        driver.get(SITE_URL);
+        AuthPageObject.iPROAuthorization();
+        MainPageObject.goToDelivery();
+        MainPageObject.setSpbInHeader();
+        Thread.sleep(500);
+        DeliveryPageObject.setDataIpro(tomorrowDay, "свыше 50");
+        DeliveryPageObject.CheckDataOneCase("Вне стандартного маршрута", tomorrowDay, "Уточните у менеджера");
     }
 
 }
