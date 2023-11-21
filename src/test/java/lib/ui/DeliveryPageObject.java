@@ -79,10 +79,10 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         MainPageObject.waitForElementAndClick("//input[@data-testid='" + pointType + "']", "Не удалось найти и кликнуть по элементу", 5);
     }
 
-    public void SearchAndCheckSelfDelivery(String searchText) throws InterruptedException
+    public void SearchAndCheckSelfDelivery(String cardType, String searchText) throws InterruptedException
     {
         MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", searchText, "error", 5);
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='selfdelivery-store-cdeck-0']")).getText().contains(searchText));
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='" + cardType + "']")).getText().contains(searchText));
     }
 
 
