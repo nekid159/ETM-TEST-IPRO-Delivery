@@ -72,27 +72,15 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='delivery-terms-table']")).getText().contains(tariffPrice));
     }
 
-    public void SetDataForSelfDelivery(String pointType, String pointName)
+    public void DisableCheckbox(String pointType)
     {
         MainPageObject.waitForElementAndClick("//input[@data-testid='" + pointType + "']", "Не удалось найти и кликнуть по элементу", 5);
-        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", pointName, "error", 5);
-
     }
 
-    public void CheckSearchSdekSelfDelivery(String firstSearch, String secondSearch, String thirdSearch) throws InterruptedException
+    public void SearchAndCheckSelfDelivery(String searchText) throws InterruptedException
     {
-        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", firstSearch, "error", 5);
-        Thread.sleep(300);
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='selfdelivery-store-cdeck-0']")).getText().contains(firstSearch));
-
-        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", secondSearch, "error", 5);
-        Thread.sleep(300);
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='selfdelivery-store-cdeck-0")).getText().contains(secondSearch));
-
-        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", thirdSearch, "error", 5);
-        Thread.sleep(300);
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='selfdelivery-store-cdeck-0")).getText().contains(thirdSearch));
-
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", searchText, "error", 5);
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='selfdelivery-store-cdeck-0']")).getText().contains(searchText));
     }
 
 

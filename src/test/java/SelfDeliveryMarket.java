@@ -23,9 +23,9 @@ public class SelfDeliveryMarket extends CoreTestCase{
         AuthPageObject.marketAuthorization();
         MainPageObject.goToDelivery();
         MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","", 5);
-        DeliveryPageObject.SetDataForSelfDelivery("checkbox-selfdelivery-etm", "Авиа");
-        DeliveryPageObject.CheckSearchSdekSelfDelivery("Римск", "Железн", "Мир");
-
-
+        DeliveryPageObject.DisableCheckbox("checkbox-selfdelivery-etm");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("Римск");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("Железн");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("Тиш");
     }
 }
