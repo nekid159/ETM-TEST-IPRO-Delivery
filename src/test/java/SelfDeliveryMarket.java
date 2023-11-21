@@ -17,15 +17,40 @@ public class SelfDeliveryMarket extends CoreTestCase{
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
 
     @Test
-    public void CheckboxesCheck() throws InterruptedException
+    public void SdekSearchCheck() throws InterruptedException
     {
         driver.get(SITE_URL);
         AuthPageObject.marketAuthorization();
         MainPageObject.goToDelivery();
         MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","", 5);
         DeliveryPageObject.DisableCheckbox("checkbox-selfdelivery-etm");
-        DeliveryPageObject.SearchAndCheckSelfDelivery("Римск");
-        DeliveryPageObject.SearchAndCheckSelfDelivery("Железн");
-        DeliveryPageObject.SearchAndCheckSelfDelivery("Тиш");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("selfdelivery-store-cdeck-0", "Римск");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("selfdelivery-store-cdeck-0","Железн");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("selfdelivery-store-cdeck-0","Тиш");
+    }
+    @Test
+    public void EtmSearchCheck() throws InterruptedException
+    {
+        driver.get(SITE_URL);
+        AuthPageObject.marketAuthorization();
+        MainPageObject.goToDelivery();
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","", 5);
+        DeliveryPageObject.DisableCheckbox("checkbox-selfdelivery-cdek");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("selfdelivery-store-etm-0","Бал");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("selfdelivery-store-etm-0","Дми");
+        DeliveryPageObject.SearchAndCheckSelfDelivery("selfdelivery-store-etm-0","Кот");
+    }
+
+    @Test
+    public void CleanAfterChangeTab() throws InterruptedException
+    {
+        driver.get(SITE_URL);
+        AuthPageObject.marketAuthorization();
+        MainPageObject.goToDelivery();
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","", 5);
+        MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", "Тест", "error", 5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-delivery']","", 5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","", 5);
+        Assert.assertTrue(driver.findElement(By.xpath("//input[@data-testid='selfdelivery-search-input']")).getAttribute("value").contains(""));
     }
 }
