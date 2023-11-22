@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Nov 22 15:52:32 MSK 2023","Wed Nov 22 15:52:51 MSK 2023","19250","","DeliveryIPROTests","","DeliveryIPROTests","OutOfDateWithPriceIpro","OutOfDateWithPriceIpro()",""
+"passed","Wed Nov 22 15:52:51 MSK 2023","Wed Nov 22 15:53:05 MSK 2023","13497","","DeliveryIPROTests","","DeliveryIPROTests","OutOfRouteIpro","OutOfRouteIpro()",""
+"passed","Wed Nov 22 15:52:01 MSK 2023","Wed Nov 22 15:52:18 MSK 2023","17438","","DeliveryIPROTests","","DeliveryIPROTests","StandardDeliveryIpro","StandardDeliveryIpro()",""
+"passed","Wed Nov 22 15:53:05 MSK 2023","Wed Nov 22 15:53:18 MSK 2023","13345","","DeliveryIPROTests","","DeliveryIPROTests","OutOfDateIpro","OutOfDateIpro()",""
+"failed","Wed Nov 22 15:52:18 MSK 2023","Wed Nov 22 15:52:32 MSK 2023","13337","","DeliveryIPROTests","","DeliveryIPROTests","ExpressDeliveryIpro","ExpressDeliveryIpro()",""

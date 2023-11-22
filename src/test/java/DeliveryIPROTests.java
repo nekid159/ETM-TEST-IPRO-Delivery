@@ -15,6 +15,8 @@ public class DeliveryIPROTests extends CoreTestCase {
     String currentDay = MainPageObject.getCurrentDay();
     String closestSunday = MainPageObject.getClosestSunday();
     String closestMonday = MainPageObject.getClosestMonday();
+
+    String closestSaturday = MainPageObject.getClosestSaturday();
     @Test
     public void StandardDeliveryIpro() throws InterruptedException
     {
@@ -60,7 +62,7 @@ public class DeliveryIPROTests extends CoreTestCase {
     MainPageObject.goToDelivery();
     MainPageObject.setMoscowInHeader();
     DeliveryPageObject.setConfiguratorCity("Московская область, Люберцы", "Московская область, Люберцы");
-    DeliveryPageObject.setDataIpro(closestSunday, "12 - 16");
+    DeliveryPageObject.setDataIpro(closestSaturday, "12 - 16");
     Thread.sleep(1000);
 }
 
