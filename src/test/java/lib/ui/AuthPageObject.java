@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class AuthPageObject extends BaseSeleniumPage {
     private static final
 
-    String LOGIN_MARKET="9191640883";
+    String LOGIN_MARKET="9160058830";
     String PASSWORD_MARKET="Dd17549bb";
     String LOGIN_IPRO="60004392tes";
     String PASSWORD_IPRO="alyd8965";
