@@ -47,14 +47,14 @@ public class MainPageObject extends BaseSeleniumPage {
     {
         Thread.sleep(1000);
         waitForElementAndClick("//button[@data-testid='current-city']", "not found and click city in header", 5);
-        waitForElementAndClick("//span[contains(.,'Москва и МО')]","not found and click element of spb city",5);
+        waitForElementAndClick("//span[contains(.,'Санкт-Петербург и ЛО')]","not found and click element of spb city",5);
     }
 
     public void setMoscowInHeader() throws InterruptedException
     {
         Thread.sleep(1000);
         waitForElementAndClick("//button[@data-testid='current-city']", "not found and click city in header", 5);
-        waitForElementAndClick("//span[contains(.,'Санкт-Петербург и ЛО')]","not found and click element of spb city",5);
+        waitForElementAndClick("//span[contains(.,'Москва и МО')]","not found and click element of spb city",5);
     }
 
 
