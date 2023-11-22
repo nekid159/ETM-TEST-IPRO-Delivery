@@ -52,6 +52,17 @@ public class DeliveryIPROTests extends CoreTestCase {
         DeliveryPageObject.CheckDataTwoCases("Вне стандартного графика", closestSunday, "Уточните у менеджера", "Стандартная", closestMonday);
 
     }
+@Test
+    public void OutOfDateWithPriceIpro() throws InterruptedException
+{
+    driver.get(SITE_URL);
+    AuthPageObject.iPROAuthorization();
+    MainPageObject.goToDelivery();
+    MainPageObject.setMoscowInHeader();
+    DeliveryPageObject.setConfiguratorCity("Московская область, Люберцы", "Московская область, Люберцы");
+    DeliveryPageObject.setDataIpro(closestSunday, "12 - 16");
+    Thread.sleep(1000);
+}
 
     @Test
     public void OutOfRouteIpro() throws InterruptedException
