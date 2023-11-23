@@ -4,9 +4,9 @@ import lib.ui.DeliveryPageObject;
 import lib.ui.MainPageObject;
 import org.junit.jupiter.api.Test;
 
-public class DeliveryIPROTests extends CoreTestCase {
+public class DeliveryIPROTests extends CoreTestCase
+{
     String SITE_URL = "https://idev.etm.ru/catalog";
-    String DELIVERY_URL = "https://idev.etm.ru/ipro3/delivery";
     AuthPageObject AuthPageObject = new AuthPageObject();
     MainPageObject MainPageObject = new MainPageObject();
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
@@ -15,8 +15,9 @@ public class DeliveryIPROTests extends CoreTestCase {
     String currentDay = MainPageObject.getCurrentDay();
     String closestSunday = MainPageObject.getClosestSunday();
     String closestMonday = MainPageObject.getClosestMonday();
-
     String closestSaturday = MainPageObject.getClosestSaturday();
+
+    //Стандартная доставка
     @Test
     public void StandardDeliveryIpro() throws InterruptedException
     {
@@ -29,6 +30,7 @@ public class DeliveryIPROTests extends CoreTestCase {
         DeliveryPageObject.CheckDataOneCase("Стандартная", tomorrowDay, "В ближайшую дату");
     }
 
+    //Экспресс-доставка
     @Test
     public void ExpressDeliveryIpro() throws InterruptedException
     {
@@ -41,6 +43,7 @@ public class DeliveryIPROTests extends CoreTestCase {
         DeliveryPageObject.CheckDataTwoCases("Экспресс-доставка", currentDay, "День в день", "Стандартная", tomorrowDay);
     }
 
+    //Вне стандартного графика, "Уточните у менеджера"
     @Test
     public void OutOfDateIpro() throws InterruptedException
     {
@@ -54,18 +57,21 @@ public class DeliveryIPROTests extends CoreTestCase {
         DeliveryPageObject.CheckDataTwoCases("Вне стандартного графика", closestSunday, "Уточните у менеджера", "Стандартная", closestMonday);
 
     }
-@Test
+
+    //Вне стандартного графика со стоимостью, стандартная
+    @Test
     public void OutOfDateWithPriceIpro() throws InterruptedException
-{
+    {
     driver.get(SITE_URL);
     AuthPageObject.iPROAuthorization();
     MainPageObject.goToDelivery();
     MainPageObject.setMoscowInHeader();
     DeliveryPageObject.setConfiguratorCity("Московская область, Люберцы", "Московская область, Люберцы");
     DeliveryPageObject.setDataIpro(closestSaturday, "12 - 16");
-    Thread.sleep(1000);
-}
+    DeliveryPageObject.CheckDataTwoCases("Вне стандартного графика", closestSaturday, "По запросу", "Стандартная", closestMonday);
+    }
 
+    //Вне стандартного маршрута
     @Test
     public void OutOfRouteIpro() throws InterruptedException
     {
