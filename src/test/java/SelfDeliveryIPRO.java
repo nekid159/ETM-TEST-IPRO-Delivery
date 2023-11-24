@@ -41,4 +41,17 @@ public class SelfDeliveryIPRO extends CoreTestCase {
         DeliveryPageObject.SearchAndCheckSelfDelivery("selfdelivery-store-cdeck-0", "Буда");
 
     }
+
+    @Test
+    public void TransitionBetweenTabsSelfDelivery() throws InterruptedException
+    {
+        driver.get(SITE_URL);
+        AuthPageObject.iPROAuthorization();
+        MainPageObject.goToDelivery();
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']", "Не удалось перейти на таб Самовывоз", 5);
+        DeliveryPageObject.DisableCheckbox("checkbox-selfdelivery-cdek");
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-delivery']", "Не удалось перейти на таб Доставка", 5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']", "Не удалось перейти на таб Самовывоз", 5);
+
+    }
 }
