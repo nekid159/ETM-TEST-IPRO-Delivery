@@ -11,6 +11,9 @@ public class DeliveryPageObject extends BaseSeleniumPage{
     {
         Thread.sleep(500);
         MainPageObject.waitForElementAndClick("//*[@id=\"simple-tab-panel-0\"]/div/div[3]/div[1]/div/div/div/div/button", "Не удалось нажать на календарь", 5);
+        Thread.sleep(500);
+        MainPageObject.checkMonthHasDay(timeSelector);
+        Thread.sleep(500);
         MainPageObject.waitForElementAndClick("//button[contains(.,'" + timeSelector + "')]", "Не удалось выбрать дату", 5);
         MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "Не удалось нажать на поле ввода веса", 5);
         MainPageObject.waitForElementAndClick("//span[contains(.,'" + weightValue + "')]", "Не удалось выбрать вес", 5);

@@ -94,6 +94,16 @@ public class MainPageObject extends BaseSeleniumPage {
         return String.valueOf(closestMonday);
     }
 
+    public void checkMonthHasDay(String date) {
+        LocalDate currentDate = LocalDate.now();
+        int today = currentDate.getDayOfMonth();
+        int dayToCheck = Integer.parseInt(date);
+        if (today > dayToCheck)
+        {
+            waitForElementAndClick("//button[@aria-label='Следующий месяц']", "Не удалось выбрать дату", 5);
+        }
+    }
+
     public WebElement waitForElementClearAndSendKeys(String xpath, String value, String error_message, long timeoutInSeconds)
     {
         WebElement element = waitForElementPresent(xpath,error_message,timeoutInSeconds);
