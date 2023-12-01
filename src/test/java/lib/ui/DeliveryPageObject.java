@@ -3,6 +3,9 @@ import lib.BaseSeleniumPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DeliveryPageObject extends BaseSeleniumPage{
     MainPageObject MainPageObject = new MainPageObject();
 
@@ -26,6 +29,8 @@ public class DeliveryPageObject extends BaseSeleniumPage{
         Thread.sleep(500);
         MainPageObject.waitForElementAndClick("//*[@id=\"simple-tab-panel-0\"]/div/div[3]/div[1]/div/div/div/div/button", "Не удалось нажать на календарь", 5);
         Thread.sleep(200);
+        MainPageObject.checkMonthHasDay((timeSelector));
+        Thread.sleep(500);
         MainPageObject.waitForElementAndClick("//button[contains(.,'" + timeSelector + "')]", "Не удалось выбрать дату", 5);
         MainPageObject.waitForElementAndClick("//input[@data-testid='configurator-delivery-weight']", "Не удалось нажать на поле ввода веса", 5);
         Thread.sleep(300);
@@ -106,5 +111,18 @@ public class DeliveryPageObject extends BaseSeleniumPage{
     {
         MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", searchText, "Не удалось ввести название пункта", 5);
         Assert.assertTrue(driver.findElement(By.xpath("//div[@data-testid='" + cardType + "']")).getText().contains(searchText));
+    }
+
+    //Метод для поиска и проверки значений в инпутах конфигуратора Доставка после перехода по табам
+    public void SearchAndCheckConfiguratorDelivery(String configuratorCity, LocalDate configuratorDate, String configuratorWeight)
+    {
+        String configuratorCityValue = driver.findElement(By.xpath("//input[@data-testid='configurator-delivery-address']")).getAttribute("value");
+        Assert.assertTrue(configuratorCityValue.equals(configuratorCity));
+        String dataValue = driver.findElement(By.xpath("//input[@data-testid='configurator-delivery-date']")).getAttribute("value");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String tomorrowDayValue = configuratorDate.format(formatter);
+        Assert.assertTrue(dataValue.equals(tomorrowDayValue));
+        String weightValue = driver.findElement(By.xpath("//input[@data-testid='configurator-delivery-weight']")).getAttribute("value");
+        Assert.assertTrue(weightValue.equals(configuratorWeight));
     }
 }

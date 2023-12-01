@@ -2,11 +2,18 @@ import lib.CoreTestCase;
 import lib.ui.AuthPageObject;
 import lib.ui.DeliveryPageObject;
 import lib.ui.MainPageObject;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DeliveryIPROTests extends CoreTestCase
 {
-    String SITE_URL = "https://idev.etm.ru/catalog";
+    //String SITE_URL = "https://idev.etm.ru/catalog";
+    String SITE_URL = "https://itest.etm.ru:3004/";
     AuthPageObject AuthPageObject = new AuthPageObject();
     MainPageObject MainPageObject = new MainPageObject();
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
@@ -16,6 +23,7 @@ public class DeliveryIPROTests extends CoreTestCase
     String closestSunday = MainPageObject.getClosestSunday();
     String closestMonday = MainPageObject.getClosestMonday();
     String closestSaturday = MainPageObject.getClosestSaturday();
+    LocalDate tomorrowDate = MainPageObject.getTomorrowDate();
 
     //Стандартная доставка
     @Test
@@ -83,5 +91,24 @@ public class DeliveryIPROTests extends CoreTestCase
         DeliveryPageObject.setDataIpro(tomorrowDay, "свыше 50");
         DeliveryPageObject.CheckDataOneCase("Вне стандартного маршрута", tomorrowDay, "Уточните у менеджера");
     }
+
+    //Проверка данных в конфигураторе Доставка после заполнения и перехода по табам
+    @Test
+    public void TransitionBetweenTabsDelivery() throws InterruptedException
+    {
+        driver.get(SITE_URL);
+        AuthPageObject.iPROAuthorization();
+        MainPageObject.setSpbInHeader();
+        MainPageObject.goToDelivery();
+        Thread.sleep(700);
+        DeliveryPageObject.setConfiguratorCity("Ленинградская область, Всеволожск, Садовая улица", "Россия, Ленинградская область, Всеволожск, Садовая улица");
+        DeliveryPageObject.setDataIpro(tomorrowDay, "12 - 16");
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","Не удалось перейти на таб Самовывоз", 5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-delivery']", "Не удалось перейти на таб Доставка", 5);
+        Thread.sleep(1000);
+        DeliveryPageObject.SearchAndCheckConfiguratorDelivery("Россия, Ленинградская область, Всеволожск, Садовая улица",tomorrowDate, "12 - 16");
+    }
+
+
 
 }
