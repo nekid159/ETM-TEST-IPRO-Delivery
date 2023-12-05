@@ -13,13 +13,14 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     String currentDay = MainPageObject.getCurrentDay();
     String closestSunday = MainPageObject.getClosestSunday();
     String closestMonday = MainPageObject.getClosestMonday();
+    String sessionId = AuthPageObject.getCurrentSession("9160058830", "Dd17549bb");
 
     //Стандартная доставка
     @Test
     public void StandardDelivery() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(tomorrowDay, "11-20", "до 5 000₽");
