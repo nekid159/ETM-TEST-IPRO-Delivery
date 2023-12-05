@@ -2,15 +2,12 @@ import lib.CoreTestCase;
 import lib.ui.AuthPageObject;
 import lib.ui.DeliveryPageObject;
 import lib.ui.MainPageObject;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class DeliveryIPROTests extends CoreTestCase {
     //String SITE_URL = "https://idev.etm.ru/catalog";
@@ -24,13 +21,16 @@ public class DeliveryIPROTests extends CoreTestCase {
     String closestSunday = MainPageObject.getClosestSunday();
     String closestMonday = MainPageObject.getClosestMonday();
     String closestSaturday = MainPageObject.getClosestSaturday();
+    String sessionId = AuthPageObject.getCurrentSession();
     LocalDate tomorrowDate = MainPageObject.getTomorrowDate();
 
     //Стандартная доставка
     @Test
     public void StandardDeliveryIpro() throws InterruptedException {
         driver.get(SITE_URL);
-        AuthPageObject.iPROAuthorization();
+        //sessionId = AuthPageObject.getCurrentSession();
+        AuthPageObject.AddCoockie(sessionId);
+        //AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         Thread.sleep(500);
@@ -42,7 +42,8 @@ public class DeliveryIPROTests extends CoreTestCase {
     @Test
     public void ExpressDeliveryIpro() throws InterruptedException {
         driver.get(SITE_URL);
-        AuthPageObject.iPROAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
+        //AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         Thread.sleep(500);
