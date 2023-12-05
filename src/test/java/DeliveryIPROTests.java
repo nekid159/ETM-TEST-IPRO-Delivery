@@ -112,12 +112,18 @@ public class DeliveryIPROTests extends CoreTestCase {
         MainPageObject.setSpbInHeader();
         MainPageObject.goToDelivery();
         Thread.sleep(700);
-        WebElement frequentlyQuestions = driver.findElement(By.xpath("//h2[contains(.,'Часто задаваемые вопросы')]"));
+        WebElement typesOfDelivery = driver.findElement(By.xpath("//h2[contains(.,'Виды доставок и самовывоза')]"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         //js.executeScript("window.scrollTo(0, document.body.scrollHeight)");  - скролл до нижней части страницы
-        js.executeScript("arguments[0].scrollIntoView(true);", frequentlyQuestions);
+        js.executeScript("arguments[0].scrollIntoView();", typesOfDelivery);
+        Thread.sleep(1000);
+        //Assert.assertTrue(driver.findElement(By.cssSelector(".jss202")).getText().contains("Часто задаваемые вопросы"));
+       // js.executeScript("arguments[0].scrollIntoView();", deliveryTabQuestions);
+     //   Thread.sleep(2000);
         MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-1']", "Не удалось перейти на вкладку Самовывоз", 5);
-
+        Thread.sleep(1000);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-2']", "Не удалось перейти на вкладку Услуги по разгрузке", 5);
+        Thread.sleep(1000);
     }
 
 
