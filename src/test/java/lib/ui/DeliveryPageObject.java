@@ -28,6 +28,8 @@ public class DeliveryPageObject extends BaseSeleniumPage{
     {
         Thread.sleep(500);
         MainPageObject.waitForElementAndClick("//*[@id=\"simple-tab-panel-0\"]/div/div[3]/div[1]/div/div/div/div/button", "Не удалось нажать на календарь", 5);
+        //MainPageObject.waitForElementAndClick("//*[@id=\"simple-tab-panel-0\"]/div/div[3]/div[1]/div/div/div/div/button", "Не удалось нажать на календарь", 5);
+       //СЕлектор: $$("[aria-label^='Выберите дату, выбрана дата'] > .MuiTouchRipple-root")
         Thread.sleep(200);
         MainPageObject.checkMonthHasDay((timeSelector));
         Thread.sleep(500);

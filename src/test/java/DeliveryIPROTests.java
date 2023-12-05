@@ -5,13 +5,14 @@ import lib.ui.MainPageObject;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class DeliveryIPROTests extends CoreTestCase
-{
+public class DeliveryIPROTests extends CoreTestCase {
     //String SITE_URL = "https://idev.etm.ru/catalog";
     String SITE_URL = "https://itest.etm.ru:3004/";
     AuthPageObject AuthPageObject = new AuthPageObject();
@@ -27,8 +28,7 @@ public class DeliveryIPROTests extends CoreTestCase
 
     //Стандартная доставка
     @Test
-    public void StandardDeliveryIpro() throws InterruptedException
-    {
+    public void StandardDeliveryIpro() throws InterruptedException {
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
@@ -40,8 +40,7 @@ public class DeliveryIPROTests extends CoreTestCase
 
     //Экспресс-доставка
     @Test
-    public void ExpressDeliveryIpro() throws InterruptedException
-    {
+    public void ExpressDeliveryIpro() throws InterruptedException {
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
@@ -53,8 +52,7 @@ public class DeliveryIPROTests extends CoreTestCase
 
     //Вне стандартного графика, "Уточните у менеджера"
     @Test
-    public void OutOfDateIpro() throws InterruptedException
-    {
+    public void OutOfDateIpro() throws InterruptedException {
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
@@ -68,21 +66,19 @@ public class DeliveryIPROTests extends CoreTestCase
 
     //Вне стандартного графика со стоимостью, стандартная
     @Test
-    public void OutOfDateWithPriceIpro() throws InterruptedException
-    {
-    driver.get(SITE_URL);
-    AuthPageObject.iPROAuthorization();
-    MainPageObject.goToDelivery();
-    MainPageObject.setMoscowInHeader();
-    DeliveryPageObject.setConfiguratorCity("Московская область, Люберцы", "Московская область, Люберцы");
-    DeliveryPageObject.setDataIpro(closestSaturday, "12 - 16");
-    DeliveryPageObject.CheckDataTwoCases("Вне стандартного графика", closestSaturday, "По запросу", "Стандартная", closestMonday);
+    public void OutOfDateWithPriceIpro() throws InterruptedException {
+        driver.get(SITE_URL);
+        AuthPageObject.iPROAuthorization();
+        MainPageObject.goToDelivery();
+        MainPageObject.setMoscowInHeader();
+        DeliveryPageObject.setConfiguratorCity("Московская область, Люберцы", "Московская область, Люберцы");
+        DeliveryPageObject.setDataIpro(closestSaturday, "12 - 16");
+        DeliveryPageObject.CheckDataTwoCases("Вне стандартного графика", closestSaturday, "По запросу", "Стандартная", closestMonday);
     }
 
     //Вне стандартного маршрута
     @Test
-    public void OutOfRouteIpro() throws InterruptedException
-    {
+    public void OutOfRouteIpro() throws InterruptedException {
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
         MainPageObject.goToDelivery();
@@ -94,8 +90,7 @@ public class DeliveryIPROTests extends CoreTestCase
 
     //Проверка данных в конфигураторе Доставка после заполнения и перехода по табам
     @Test
-    public void TransitionBetweenTabsDelivery() throws InterruptedException
-    {
+    public void TransitionBetweenTabsDelivery() throws InterruptedException {
         driver.get(SITE_URL);
         AuthPageObject.iPROAuthorization();
         MainPageObject.setSpbInHeader();
@@ -103,12 +98,27 @@ public class DeliveryIPROTests extends CoreTestCase
         Thread.sleep(700);
         DeliveryPageObject.setConfiguratorCity("Ленинградская область, Всеволожск, Садовая улица", "Россия, Ленинградская область, Всеволожск, Садовая улица");
         DeliveryPageObject.setDataIpro(tomorrowDay, "12 - 16");
-        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","Не удалось перейти на таб Самовывоз", 5);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']", "Не удалось перейти на таб Самовывоз", 5);
         MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-delivery']", "Не удалось перейти на таб Доставка", 5);
         Thread.sleep(1000);
-        DeliveryPageObject.SearchAndCheckConfiguratorDelivery("Россия, Ленинградская область, Всеволожск, Садовая улица",tomorrowDate, "12 - 16");
+        DeliveryPageObject.SearchAndCheckConfiguratorDelivery("Россия, Ленинградская область, Всеволожск, Садовая улица", tomorrowDate, "12 - 16");
     }
 
+    @Test
+    public void FrequentlyAskedQuestions() throws InterruptedException
+    {
+        driver.get(SITE_URL);
+        AuthPageObject.iPROAuthorization();
+        MainPageObject.setSpbInHeader();
+        MainPageObject.goToDelivery();
+        Thread.sleep(700);
+        WebElement frequentlyQuestions = driver.findElement(By.xpath("//h2[contains(.,'Часто задаваемые вопросы')]"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        //js.executeScript("window.scrollTo(0, document.body.scrollHeight)");  - скролл до нижней части страницы
+        js.executeScript("arguments[0].scrollIntoView(true);", frequentlyQuestions);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-1']", "Не удалось перейти на вкладку Самовывоз", 5);
+
+    }
 
 
 }
