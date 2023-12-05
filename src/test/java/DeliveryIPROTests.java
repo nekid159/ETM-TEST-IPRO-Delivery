@@ -21,7 +21,7 @@ public class DeliveryIPROTests extends CoreTestCase {
     String closestSunday = MainPageObject.getClosestSunday();
     String closestMonday = MainPageObject.getClosestMonday();
     String closestSaturday = MainPageObject.getClosestSaturday();
-    String sessionId = AuthPageObject.getCurrentSession();
+    String sessionId = AuthPageObject.getCurrentSession("51951tes", "gvuq3266");
     LocalDate tomorrowDate = MainPageObject.getTomorrowDate();
 
     //Стандартная доставка
@@ -55,7 +55,7 @@ public class DeliveryIPROTests extends CoreTestCase {
     @Test
     public void OutOfDateIpro() throws InterruptedException {
         driver.get(SITE_URL);
-        AuthPageObject.iPROAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         Thread.sleep(1000);

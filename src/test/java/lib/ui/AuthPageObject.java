@@ -31,7 +31,7 @@ public class AuthPageObject extends BaseSeleniumPage {
     String LOGIN_IPRO="60004392tes";
     String PASSWORD_IPRO="alyd8965";
     MainPageObject MainPageObject = new MainPageObject();
-    String SITE_URL = "https://itest.etm.ru:3004/";
+    //String SITE_URL = "https://itest.etm.ru:3004/";
 
 
 
@@ -65,16 +65,21 @@ public class AuthPageObject extends BaseSeleniumPage {
         MainPageObject.waitForElementAndClick("//button[@data-testid='okay-button']","not found and click element of cookies",5);
         MainPageObject.waitForElementAndClick("//button[@data-testid='understand-button']","not found and click element of cookies",5);
     }
-    public void AddCoockie(String sessionId) {
-        driver.navigate().to(SITE_URL);
+    public void cookiesOK() throws InterruptedException
+    {
+        Thread.sleep(500);
+        MainPageObject.waitForElementAndClick("//button[@data-testid='understand-button']","not found and click element of cookies",5);
+    }
+    public void AddCoockie(String sessionId) throws InterruptedException {
+        //driver.navigate().to(SITE_URL);
         Cookie cookie = new Cookie("session-id", sessionId);
-        System.out.println(sessionId);
         driver.manage().addCookie(cookie);
         Cookie driverCookie = driver.manage().getCookieNamed("session-id");
 
         assertThat(driverCookie.getValue(), equalTo(sessionId));
+        cookiesOK();
     }
-    public static String getCurrentSession() {
+    public static String getCurrentSession(String login, String pass) {
         String sessionId = null;
         try {
             String postUrl = "https://idev.etm.ru/api/ipro/user/login";
@@ -82,8 +87,8 @@ public class AuthPageObject extends BaseSeleniumPage {
             HttpPost httpPost = new HttpPost(postUrl);
 
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("log", "51951tes"));
-            params.add(new BasicNameValuePair("pwd", "gvuq3266"));
+            params.add(new BasicNameValuePair("log", login));
+            params.add(new BasicNameValuePair("pwd", pass));
             httpPost.setEntity(new UrlEncodedFormEntity(params));
 
             HttpResponse response = httpClient.execute(httpPost);
@@ -99,7 +104,6 @@ public class AuthPageObject extends BaseSeleniumPage {
             JsonObject jsonResponse = parser.parse(responseText.toString()).getAsJsonObject();
 
             sessionId = jsonResponse.getAsJsonObject("data").get("session").getAsString();
-            System.out.println(sessionId);
             httpClient.getConnectionManager().shutdown();
         } catch (IOException e) {
             e.printStackTrace();
