@@ -11,13 +11,14 @@ public class SelfDeliveryMarket extends CoreTestCase{
     AuthPageObject AuthPageObject = new AuthPageObject();
     MainPageObject MainPageObject = new MainPageObject();
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();
+    String sessionId = AuthPageObject.getCurrentSession("9160058830", "Dd17549bb");
 
     //Поиск по точкам самовывоза СДЭК
     @Test
     public void SdekSearchCheck() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","Не удалось переключиться на Самовывоз", 5);
         DeliveryPageObject.DisableCheckbox("checkbox-selfdelivery-etm");
@@ -31,7 +32,7 @@ public class SelfDeliveryMarket extends CoreTestCase{
     public void EtmSearchCheck() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","Не удалось переключиться на Самовывоз", 5);
         DeliveryPageObject.DisableCheckbox("checkbox-selfdelivery-cdek");
@@ -45,7 +46,7 @@ public class SelfDeliveryMarket extends CoreTestCase{
     public void CleanAfterChangeTab() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.waitForElementAndClick("//button[@data-testid='tab-list-selfDelivery']","Не удалось переключиться на Самовывоз", 5);
         MainPageObject.waitForElementClearAndSendKeys("//input[@data-testid='selfdelivery-search-input']", "Тест", "Не удалось ввести в поиск", 5);

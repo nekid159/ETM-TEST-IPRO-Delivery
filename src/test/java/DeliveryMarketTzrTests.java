@@ -33,7 +33,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void ExpressDelivery() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(currentDay, "11-20", "до 5 000₽");
@@ -46,7 +46,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void StandardDeliveryFree() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(tomorrowDay, "11-20", "более 5 000₽");
@@ -58,7 +58,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void ExpressDeliveryFree() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(currentDay, "11-20", "более 5 000₽");
@@ -70,7 +70,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void OutOfDate() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(closestSunday, "11-20", "более 5 000₽");
@@ -83,7 +83,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void OutOfDateManager() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setData(currentDay, "11-20", "более 5 000₽");
@@ -97,7 +97,7 @@ public class DeliveryMarketTzrTests extends CoreTestCase {
     public void OutOfRouteManager() throws InterruptedException
     {
         driver.get(SITE_URL);
-        AuthPageObject.marketAuthorization();
+        AuthPageObject.AddCoockie(sessionId);
         MainPageObject.goToDelivery();
         MainPageObject.setSpbInHeader();
         DeliveryPageObject.setConfiguratorCity("Иркутск", "Иркутск");
