@@ -45,7 +45,7 @@ public class MainPageObject extends BaseSeleniumPage {
 
     public void setSpbInHeader() throws InterruptedException
     {
-        //Thread.sleep(1000);
+        Thread.sleep(1000);
         waitForElementAndClick("//button[@data-testid='current-city']", "not found and click city in header", 5);
         waitForElementAndClick("//span[contains(.,'Санкт-Петербург и ЛО')]","not found and click element of spb city",5);
     }
