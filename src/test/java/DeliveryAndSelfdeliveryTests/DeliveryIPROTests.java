@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 public class DeliveryIPROTests extends CoreTestCase {
     //String SITE_URL = "https://idev.etm.ru/catalog";
-    String SITE_URL = "https://idev.etm.ru/";
+    String SITE_URL = "https://itest.etm.ru:3004/";
     AuthPageObject AuthPageObject = new AuthPageObject();
     MainPageObject MainPageObject = new MainPageObject();
     DeliveryPageObject DeliveryPageObject = new DeliveryPageObject();

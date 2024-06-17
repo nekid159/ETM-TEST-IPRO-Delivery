@@ -14,7 +14,7 @@ abstract public class CoreTestCase {
     @BeforeEach
     public  void setUp() throws Exception{
 
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().clearResolutionCache().setup();
         ChromeOptions options= new ChromeOptions();
         options.setHeadless(false);
         options.addArguments("--disable-gpu");
